@@ -1,0 +1,70 @@
+----------------        ---- -- -  - - - - - -- 
+query getAllUsers{
+  users
+  {
+    _id
+    lname
+  }
+}
+---------------------------------  ---------------- 
+
+query getAllQuotes{
+  quotes{
+    name
+    by{
+      _id
+      fname
+    }
+  }
+}
+--------------------------------------------------------
+query combinedData{
+  users{
+    fname
+    lname
+    email
+    quote{
+      by
+      name
+    }
+  }
+}
+
+----------------------------------------------------------
+query specificUserData{          
+  user(_id:"23456"){
+    fname
+    lname
+    quote{
+      by
+      name
+    }
+    }
+}
+
+// with using query variable 
+{
+  "userId": "23456"
+}
+
+query specificUserQuote($userId:ID){
+  iquote(userId: $userId){
+    name
+    }
+}
+------------------------------------------------------------
+Query variable-
+{
+  "newUser": {"fname":"suraj", "lname": "Kumar", "email":"suraj@gmail.com", "password":"suraj@123"}
+}
+
+mutation createNewUser($newUser: UserInput){
+  user:signUpUserDummy(newUser:$newUser){
+    fname
+    lname
+    email
+  }
+}
+
+--------------------------------------------------------------
+
